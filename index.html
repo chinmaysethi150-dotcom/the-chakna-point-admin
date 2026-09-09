@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<link rel="manifest" href="manifest.json">
+<title>The Chakna Point — Admin</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div><b>The Chakna Point</b><span>Admin Panel</span></div>
+  <button id="logoutBtn" class="ghost hidden">Logout</button>
+</header>
+
+<main>
+<section id="loginView" class="card login">
+  <h1>Admin Login</h1>
+  <p>Sirf shop owner/admin ke liye.</p>
+  <input id="email" type="email" placeholder="Admin email">
+  <input id="password" type="password" placeholder="Password">
+  <button id="loginBtn">Login</button>
+  <p id="loginMsg" class="error"></p>
+</section>
+
+<section id="appView" class="hidden">
+  <div class="tabs">
+    <button class="tab active" data-tab="orders">Orders</button>
+    <button class="tab" data-tab="products">Products</button>
+  </div>
+
+  <section id="ordersTab" class="tabpage">
+    <div class="row between"><h2>Live Orders</h2><span id="orderCount" class="pill">0</span></div>
+    <div id="orders"></div>
+  </section>
+
+  <section id="productsTab" class="tabpage hidden">
+    <div class="row between"><h2>Products</h2><button id="newProductBtn">+ Add Product</button></div>
+    <div id="productForm" class="card hidden">
+      <h3 id="formTitle">Add Product</h3>
+      <input id="pName" placeholder="Product name">
+      <input id="pPrice" type="number" min="0" placeholder="Price ₹">
+      <input id="pCategory" placeholder="Category (Chicken / Egg / Drinks / Snacks)">
+      <input id="pPhoto" placeholder="Photo URL (optional)">
+      <label class="check"><input id="pAvailable" type="checkbox" checked> Available</label>
+      <div class="row"><button id="saveProductBtn">Save</button><button id="cancelProductBtn" class="secondary">Cancel</button></div>
+      <input id="editId" type="hidden">
+    </div>
+    <div id="products"></div>
+  </section>
+</section>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

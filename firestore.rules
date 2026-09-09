@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Customer app: anonymous customers can create orders only.
+    match /orders/{orderId} {
+      allow create: if request.auth != null;
+      // Replace admin@example.com with your real admin email.
+      allow read, update, delete: if request.auth != null
+        && request.auth.token.email == "admin@example.com";
+    }
+
+    // Admin manages menu products.
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if request.auth != null
+        && request.auth.token.email == "admin@example.com";
+    }
+  }
+}
