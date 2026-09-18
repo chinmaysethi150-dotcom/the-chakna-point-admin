@@ -1,0 +1,18 @@
+workflows:
+  admin-android:
+    name: The Chakna Point Admin APK
+    max_build_duration: 60
+    environment:
+      groups:
+        - google_credentials
+    scripts:
+      - name: Build Admin APK
+        script: |
+          if [ -f ./gradlew ]; then
+            chmod +x ./gradlew
+            ./gradlew assembleDebug
+          else
+            gradle assembleDebug
+          fi
+    artifacts:
+      - app/build/outputs/**/*.apk

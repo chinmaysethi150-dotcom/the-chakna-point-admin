@@ -1,30 +1,17 @@
-# The Chakna Point Admin PWA
+# The Chakna Point Admin
 
-## What this does
-- Admin email/password login
-- Live Firestore orders
-- Order status: New → Accepted → Preparing → Ready → Delivered
-- Customer name and address
-- Items, quantities, subtotal, delivery and total
-- COD/UPI payment status
-- Add/edit/delete products
-- Product price/category/photo/availability
+Android Admin App for The Chakna Point.
 
-## Firebase setup (one time)
-1. Firebase Console → Authentication → Sign-in method → enable Email/Password.
-2. Authentication → Users → Add user. Create your admin email and password.
-3. Copy your admin email.
-4. In `firestore.rules`, replace BOTH occurrences of `admin@example.com` with that exact email.
-5. Firebase Console → Firestore Database → Rules → paste `firestore.rules` and Publish.
-6. Customer app can continue using Anonymous Authentication.
+## Before building
+1. Firebase Authentication: enable Email/Password.
+2. Add a Firebase Web App and paste its config into `app/src/main/assets/firebase-config.js`.
+3. Create Firestore collections: `admins`, `products`, `orders`, `customers`.
+4. Create the admin user in Firebase Authentication.
+5. Create `admins/<ADMIN_UID>` with `active: true`.
+6. Deploy `firestore.rules`.
 
-Important: Do NOT put a Firebase service-account JSON/private key in this PWA.
+## Important
+Admin login uses Email/Password, not SMS OTP, so the current Phone Auth billing problem does not block this app's development.
 
-## GitHub Pages
-Upload all files in this folder to the admin repository root, then enable:
-Settings → Pages → Deploy from branch → main → /(root)
-
-Then open the Pages URL.
-
-## First product data
-You can add products from Admin → Products. The customer app must be updated to read the `products` collection if you want menu changes made here to appear automatically.
+## Codemagic
+The repository must contain the files in this ZIP at its root. `codemagic.yaml` is already included.
