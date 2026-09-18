@@ -3,23 +3,34 @@ name: Unpack Admin Project
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   unpack:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Unzip Admin Project
+      - name: Unpack Admin ZIP
         run: |
-          unzip -o TheChaknaPoint_Admin_Ready.zip -d .
-          rm -f TheChaknaPoint_Admin_Ready.zip
+          mkdir -p extracted
+          unzip -o "TheChaknaPoint_Admin_Ready.zip" -d extracted
+
+          cp -r extracted/* .
+
+          rm -rf extracted
+          rm -f "TheChaknaPoint_Admin_Ready.zip"
 
       - name: Commit extracted project
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add .
-          git commit -m "Unpack admin Android project" || echo "Nothing to commit"
+          git diff --cached --quiet || git commit -m "Extract Admin Android project"
           git push
