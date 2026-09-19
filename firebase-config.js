@@ -1,4 +1,6 @@
-const firebaseConfig = {
+// Firebase Console -> Project settings -> Your apps -> Web app -> Config
+
+window.FIREBASE_CONFIG = {
   apiKey: "AIzaSyDMBWthbJXYQgFajXqC56NM0jyYS5i9JRk",
   authDomain: "the-chakna-point.firebaseapp.com",
   projectId: "the-chakna-point",
